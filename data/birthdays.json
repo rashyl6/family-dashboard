@@ -1,6 +1,13 @@
 {
   "birthdays": [
     {
+      "name": "Maria",
+      "date": "02-28",
+      "year": null,
+      "color": "#4A5568",
+      "relation": "family"
+    },
+    {
       "name": "Mamma (Rasmus)",
       "date": "04-29",
       "year": null,

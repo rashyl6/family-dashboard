@@ -28,7 +28,7 @@
 - **Klara:** Gymnastics on **Tuesdays** 19:00–20:00
 - **Ebbe:** Parkour on **Fridays** 17:00–18:15
 - **Hopprep:** Wednesdays 17:00–18:00 (recurring family calendar)
-- **Lo:** Kindergarten weekdays
+- **Lo:** Förskolan Arkitekten, "Upptäckarna Grön 2" — Mon–Fri 07:45–15:30. Tempus iCal synced to Google Calendar (calendar ID: 481shjo57uc8hs47rklcu4qrv56c2t5j@import.calendar.google.com)
 
 ---
 
@@ -91,6 +91,8 @@
 | 2026-03-06 | Password protection added (simple JS gate). |
 | 2026-03-06 | Confirmed: Klara & Ebbe at Kulladalsskolan, Lo at Förskolan Arkitekten. |
 | 2026-03-06 | Confirmed: Ebbe parkour Fridays, Klara gymnastics Tuesdays, Hopprep Wednesdays. |
+| 2026-03-04 | Lo's Tempus iCal confirmed synced to Google Calendar — can read Lo's schedule automatically. |
+| 2026-03-04 | Birthdays found in calendar: Maria Feb 28, Mamma (Rasmus) Apr 29. May 31 "Födelsedag" — name unknown. Kids' birthdays not in calendar yet. |
 
 ---
 
