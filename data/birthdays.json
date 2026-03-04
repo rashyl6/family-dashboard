@@ -27,6 +27,20 @@
       "year": 2017,
       "color": "#2E86AB",
       "relation": "family"
+    },
+    {
+      "name": "Lo",
+      "date": "03-05",
+      "year": 2020,
+      "color": "#F4845F",
+      "relation": "family"
+    },
+    {
+      "name": "Rasmus",
+      "date": "05-31",
+      "year": null,
+      "color": "#4A5568",
+      "relation": "family"
     }
   ]
 }
