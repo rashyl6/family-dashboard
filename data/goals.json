@@ -1,0 +1,40 @@
+{
+  "goals": [
+    {
+      "id": "greece-holiday",
+      "title": "Greece holiday — summer 2027",
+      "category": "travel",
+      "icon": "🇬🇷",
+      "target": 30000,
+      "current": 8500,
+      "unit": "kr",
+      "targetDate": "2027-06-01",
+      "notes": "Santorini or Rhodes. Budget ~30,000 kr for family of 5.",
+      "color": "#2E86AB"
+    },
+    {
+      "id": "family-reading",
+      "title": "Family reading challenge",
+      "category": "learning",
+      "icon": "📚",
+      "target": 52,
+      "current": 11,
+      "unit": "books",
+      "targetDate": "2026-12-31",
+      "notes": "1 book per week across the family. Klara 4, Ebbe 4, Lo 2, adults 1 each.",
+      "color": "#7B5EA7"
+    },
+    {
+      "id": "bike-rides",
+      "title": "Weekend bike rides",
+      "category": "fitness",
+      "icon": "🚴",
+      "target": 20,
+      "current": 2,
+      "unit": "rides",
+      "targetDate": "2026-10-31",
+      "notes": "20 family bike rides this year — any route counts.",
+      "color": "#F4845F"
+    }
+  ]
+}

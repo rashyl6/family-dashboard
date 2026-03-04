@@ -1,0 +1,40 @@
+{
+  "routines": [
+    {
+      "id": "quiet-hour",
+      "title": "Quiet Hour",
+      "time": "7–8 pm",
+      "days": "School evenings",
+      "description": "No screens. Everyone reads, paints, draws, or just sits. This is our most protected ritual.",
+      "icon": "🕯️",
+      "color": "#7B5EA7"
+    },
+    {
+      "id": "friday-movie",
+      "title": "Friday Movie Night",
+      "time": "After dinner",
+      "days": "Fridays",
+      "description": "Kids choose by turn. Popcorn mandatory.",
+      "icon": "🎬",
+      "color": "#F4845F"
+    },
+    {
+      "id": "sunday-breakfast",
+      "title": "Sunday Pancake Breakfast",
+      "time": "Morning",
+      "days": "Sundays",
+      "description": "Everyone helps. The kids set the table. No rushing.",
+      "icon": "🥞",
+      "color": "#2E86AB"
+    },
+    {
+      "id": "bedtime-stories",
+      "title": "Bedtime Stories — Lo",
+      "time": "19:30",
+      "days": "Every night",
+      "description": "Lo picks two books. Always two.",
+      "icon": "📖",
+      "color": "#F4845F"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "car-service",
+      "title": "Car service",
+      "due": "2027-02-15",
+      "category": "car",
+      "note": "Last serviced Feb 2026. Book at Opus when due.",
+      "remind_months_before": 2,
+      "icon": "🚗"
+    },
+    {
+      "id": "dentist-klara",
+      "title": "Klara — dentist check-up",
+      "due": "2026-06-01",
+      "category": "health",
+      "note": "Book for June — call Folktandvården.",
+      "remind_months_before": 1,
+      "icon": "🦷"
+    },
+    {
+      "id": "dentist-ebbe",
+      "title": "Ebbe — dentist check-up",
+      "due": "2026-06-01",
+      "category": "health",
+      "note": "Same as Klara — try to book on same day.",
+      "remind_months_before": 1,
+      "icon": "🦷"
+    },
+    {
+      "id": "home-insurance",
+      "title": "Home insurance renewal",
+      "due": "2026-09-01",
+      "category": "finance",
+      "note": "Compare prices with Hedvig and Länsförsäkringar before renewing.",
+      "remind_months_before": 2,
+      "icon": "🏠"
+    },
+    {
+      "id": "passport-klara",
+      "title": "Klara's passport expires",
+      "due": "2027-08-10",
+      "category": "documents",
+      "note": "Renew in spring 2027 before summer travel.",
+      "remind_months_before": 3,
+      "icon": "📘"
+    }
+  ]
+}

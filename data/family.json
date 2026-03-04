@@ -1,0 +1,25 @@
+{
+  "plans": [
+    {
+      "title": "Dinner with the Lindgrens",
+      "date": "2026-03-13",
+      "type": "social",
+      "who": "Adults",
+      "notes": "Friday evening, they're coming to us. Ask about starter."
+    },
+    {
+      "title": "Date night",
+      "date": "2026-03-20",
+      "type": "date",
+      "who": "Adults",
+      "notes": "Booked at Sturehof, 19:30. Klara babysits."
+    },
+    {
+      "title": "Spring walk — Djurgården",
+      "date": "2026-03-15",
+      "type": "family",
+      "who": "Family",
+      "notes": "Sunday — pack a thermos and something to eat."
+    }
+  ]
+}

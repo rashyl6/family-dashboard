@@ -1,0 +1,18 @@
+{
+  "familyName": "Our Week",
+  "adults": [
+    { "name": "Mum", "color": "#4A5568" },
+    { "name": "Dad", "color": "#4A5568" }
+  ],
+  "kids": [
+    { "name": "Klara", "age": 10, "color": "#7B5EA7", "emoji": "🟣" },
+    { "name": "Ebbe",  "age": 8,  "color": "#2E86AB", "emoji": "🔵" },
+    { "name": "Lo",    "age": 5,  "color": "#F4845F", "emoji": "🟠" }
+  ],
+  "quietHour": {
+    "label": "Quiet Hour",
+    "time": "19:00–20:00",
+    "description": "No screens. Read, paint, draw.",
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday"]
+  }
+}

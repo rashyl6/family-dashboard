@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Week</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 1 — HEADER
+  ═══════════════════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-title">
+        <h1 id="family-name">Our Week</h1>
+        <p id="header-date" class="header-date"></p>
+      </div>
+      <div class="header-kids">
+        <span class="kid-dot" style="background:#7B5EA7" title="Klara">K</span>
+        <span class="kid-dot" style="background:#2E86AB" title="Ebbe">E</span>
+        <span class="kid-dot" style="background:#F4845F" title="Lo">L</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — THIS WEEK BY CLAUDE
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card narrative-card" id="section-narrative">
+      <div class="card-label">This week, by Claude</div>
+      <blockquote id="narrative-text" class="narrative-text">
+        Loading…
+      </blockquote>
+      <p class="narrative-meta" id="narrative-meta"></p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — THE WEEK AHEAD (7-day strip)
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-calendar">
+      <h2 class="card-title">The Week Ahead</h2>
+      <div class="week-strip" id="week-strip">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — KIDS' CORNER
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-kids">
+      <h2 class="card-title">Kids' Corner</h2>
+      <div class="tab-bar" id="kids-tabs">
+        <button class="tab-btn active" data-kid="Klara" style="--kid-color:#7B5EA7">Klara</button>
+        <button class="tab-btn" data-kid="Ebbe" style="--kid-color:#2E86AB">Ebbe</button>
+        <button class="tab-btn" data-kid="Lo" style="--kid-color:#F4845F">Lo</button>
+      </div>
+      <div id="kids-panel">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — FAMILY LIFE
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-family">
+      <h2 class="card-title">Family Life</h2>
+      <div id="family-plans">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6 — HOUSE & ADMIN
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-admin">
+      <h2 class="card-title">House &amp; Admin</h2>
+      <div id="admin-list">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 7 — FAMILY GOALS
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-goals">
+      <h2 class="card-title">Family Goals</h2>
+      <div id="goals-list">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 8 — FAMILY ROUTINES
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-routines">
+      <h2 class="card-title">Family Routines</h2>
+      <div id="routines-grid" class="routines-grid">
+        <!-- Populated by script.js -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 9 — SAVED BY US
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card saved-card" id="section-saved">
+      <h2 class="card-title">Saved by Us</h2>
+      <div id="saved-display">
+        <!-- Populated by script.js — shows one item at a time, rotates -->
+      </div>
+      <div class="saved-nav">
+        <button class="saved-prev" id="saved-prev" aria-label="Previous">←</button>
+        <span id="saved-counter" class="saved-counter"></span>
+        <button class="saved-next" id="saved-next" aria-label="Next">→</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 10 — PHOTO SLIDESHOW
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card slideshow-card" id="section-slideshow">
+      <h2 class="card-title">Photos</h2>
+      <div class="slideshow-container" id="slideshow">
+        <div class="slideshow-placeholder" id="slideshow-placeholder">
+          <div class="placeholder-inner">
+            <span class="placeholder-icon">📸</span>
+            <p>Add photos to the <code>photos/</code> folder</p>
+            <p class="placeholder-sub">Supported: JPG, PNG, WEBP, GIF</p>
+          </div>
+        </div>
+        <div id="slideshow-slides" class="slideshow-slides"></div>
+        <div class="slideshow-controls" id="slideshow-controls" style="display:none">
+          <button class="slide-btn" id="slide-prev" aria-label="Previous photo">‹</button>
+          <div class="slide-dots" id="slide-dots"></div>
+          <button class="slide-btn" id="slide-next" aria-label="Next photo">›</button>
+        </div>
+        <button class="fullscreen-btn" id="fullscreen-btn" title="Fullscreen" style="display:none">⛶</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Updated by Claude · <span id="footer-date"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
