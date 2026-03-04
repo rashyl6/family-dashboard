@@ -549,7 +549,7 @@ async function renderWeather() {
       const ft = getParam(entry.parameters, 't');
       const fsym = getParam(entry.parameters, 'Wsymb2');
       const ficon = WSYMB[fsym] || '🌡️';
-      const dayName = new Date(dateKey).toLocaleDateString('sv-SE', { weekday: 'short' });
+      const dayName = new Date(dateKey + 'T12:00:00').toLocaleDateString('sv-SE', { weekday: 'short' });
       return `<div class="forecast-day"><div class="forecast-name">${dayName}</div><div class="forecast-icon">${ficon}</div><div class="forecast-temp">${Math.round(ft)}°</div></div>`;
     }).join('');
   } catch(e) {
