@@ -1,25 +1,3 @@
 {
-  "exams": [
-    {
-      "kid": "Klara",
-      "subject": "Geography",
-      "date": "2026-03-12",
-      "topic": "European capitals",
-      "notes": "She's been preparing well — review capitals quiz the night before"
-    },
-    {
-      "kid": "Klara",
-      "subject": "Maths",
-      "date": "2026-03-26",
-      "topic": "Fractions and decimals",
-      "notes": "Mid-term test"
-    },
-    {
-      "kid": "Ebbe",
-      "subject": "Swedish spelling",
-      "date": "2026-03-10",
-      "topic": "Week 10 word list",
-      "notes": "Practice word list in homework folder"
-    }
-  ]
+  "exams": []
 }

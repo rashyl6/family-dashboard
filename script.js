@@ -99,7 +99,15 @@ function renderHeader(config) {
 /* ─── Section 2 — Narrative ─────────────────────────────────── */
 function renderNarrative(data) {
   if (!data) return;
-  $('narrative-text').textContent = data.text || '';
+  const el = $('narrative-text');
+  const text = data.text || '';
+  // Split on sentence boundaries and render each as a paragraph
+  const sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim());
+  if (sentences.length > 1) {
+    el.innerHTML = sentences.map(s => `<p>${s}</p>`).join('');
+  } else {
+    el.textContent = text;
+  }
   if (data.updatedAt) {
     $('narrative-meta').textContent = 'Vecka fr.o.m. ' + formatShortDate(data.week) + ' · Uppdaterad ' + formatShortDate(data.updatedAt);
   }
@@ -110,13 +118,17 @@ function renderWeek(data) {
   const strip = $('week-strip');
   if (!strip) return;
 
-  // Build 7-day range starting from today
+  // Build Mon–Sun of current week
   const days = [];
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const dow = today.getDay(); // 0=Sun, 1=Mon...6=Sat
+  const daysToMonday = dow === 0 ? -6 : 1 - dow;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + daysToMonday);
   for (let i = 0; i < 7; i++) {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i);
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
     const iso = d.toISOString().split('T')[0];
     days.push({ iso, d });
   }
@@ -481,9 +493,111 @@ function renderSlideshow() {
   });
 }
 
+/* ─── Weather ───────────────────────────────────────────────── */
+const WSYMB = {
+  1:'☀️', 2:'🌤️', 3:'🌤️', 4:'⛅', 5:'☁️', 6:'🌫️',
+  7:'🌦️', 8:'🌦️', 9:'🌧️', 10:'⛈️',
+  11:'🌨️', 12:'🌨️', 13:'🌨️',
+  14:'❄️', 15:'❄️', 16:'❄️', 17:'⛈️',
+  18:'🌧️', 19:'🌧️', 20:'🌧️', 21:'⛈️',
+  22:'🌨️', 23:'🌨️', 24:'🌨️',
+  25:'❄️', 26:'❄️', 27:'❄️'
+};
+
+function getParam(params, name) {
+  const p = params.find(x => x.name === name);
+  return p ? p.values[0] : null;
+}
+
+async function renderWeather() {
+  const todayEl = $('weather-today');
+  const forecastEl = $('weather-forecast');
+  if (!todayEl) return;
+  try {
+    const res = await fetch('https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/13.0038/lat/55.6050/data.json');
+    const data = await res.json();
+    const series = data.timeSeries;
+
+    // Group by date, pick entry closest to noon (local time)
+    const byDate = {};
+    series.forEach(entry => {
+      const d = new Date(entry.validTime);
+      const dateKey = d.toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' }).split('T')[0];
+      const localHour = d.toLocaleTimeString('sv-SE', { timeZone: 'Europe/Stockholm', hour: '2-digit', hour12: false });
+      const hour = parseInt(localHour);
+      if (!byDate[dateKey] || Math.abs(hour - 12) < Math.abs(byDate[dateKey].hour - 12)) {
+        byDate[dateKey] = { entry, hour };
+      }
+    });
+
+    const dates = Object.keys(byDate).sort().slice(0, 6);
+    if (dates.length === 0) { todayEl.textContent = 'Väderdata ej tillgänglig.'; return; }
+
+    // Today
+    const todayKey = new Date().toLocaleDateString('sv-SE');
+    const todayData = byDate[todayKey] || byDate[dates[0]];
+    const t = getParam(todayData.entry.parameters, 't');
+    const sym = getParam(todayData.entry.parameters, 'Wsymb2');
+    const ws = getParam(todayData.entry.parameters, 'ws');
+    const icon = WSYMB[sym] || '🌡️';
+    todayEl.innerHTML = `<span class="weather-icon">${icon}</span><span class="weather-temp">${Math.round(t)}°C</span><span class="weather-wind">${Math.round(ws)} m/s</span>`;
+
+    // 5-day forecast (skip today)
+    const forecastDates = dates.filter(d => d !== todayKey).slice(0, 5);
+    forecastEl.innerHTML = forecastDates.map(dateKey => {
+      const { entry } = byDate[dateKey];
+      const ft = getParam(entry.parameters, 't');
+      const fsym = getParam(entry.parameters, 'Wsymb2');
+      const ficon = WSYMB[fsym] || '🌡️';
+      const dayName = new Date(dateKey).toLocaleDateString('sv-SE', { weekday: 'short' });
+      return `<div class="forecast-day"><div class="forecast-name">${dayName}</div><div class="forecast-icon">${ficon}</div><div class="forecast-temp">${Math.round(ft)}°</div></div>`;
+    }).join('');
+  } catch(e) {
+    todayEl.textContent = 'Kunde inte ladda väder.';
+  }
+}
+
+/* ─── Birthdays ─────────────────────────────────────────────── */
+function renderBirthdays(data) {
+  const container = $('birthdays-list');
+  if (!container) return;
+  const birthdays = data && data.birthdays ? data.birthdays : [];
+  if (birthdays.length === 0) {
+    container.innerHTML = '<p class="no-items">Inga födelsedagar inlagda.</p>';
+    return;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const thisYear = today.getFullYear();
+
+  const upcoming = birthdays.map(b => {
+    const [month, day] = b.date.split('-').map(Number);
+    let next = new Date(thisYear, month - 1, day);
+    if (next < today) next = new Date(thisYear + 1, month - 1, day);
+    const days = Math.round((next - today) / 86400000);
+    const age = b.year ? (next.getFullYear() - b.year) : null;
+    return { ...b, days, next, age };
+  }).sort((a, b) => a.days - b.days).slice(0, 6);
+
+  container.innerHTML = upcoming.map(b => {
+    const daysLabel = b.days === 0 ? '🎉 Idag!' : b.days === 1 ? 'Imorgon' : `${b.days} dagar`;
+    const ageLabel = b.age ? ` · fyller ${b.age}` : '';
+    const color = b.color || '#4A5568';
+    return `<div class="birthday-item">
+      <div class="birthday-dot" style="background:${color}"></div>
+      <div class="birthday-body">
+        <div class="birthday-name">${b.name}${ageLabel}</div>
+        <div class="birthday-date">${b.next.toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' })}</div>
+      </div>
+      <div class="birthday-days ${b.days === 0 ? 'urgent' : b.days <= 7 ? 'warning' : ''}">${daysLabel}</div>
+    </div>`;
+  }).join('');
+}
+
 /* ─── Main Init ─────────────────────────────────────────────── */
 async function init() {
-  const [config, narrative, calendar, homework, exams, family, admin, goals, routines, saved] = await Promise.all([
+  const [config, narrative, calendar, homework, exams, family, admin, routines, saved, birthdays] = await Promise.all([
     fetchJSON('data/config.json'),
     fetchJSON('data/narrative.json'),
     fetchJSON('data/calendar.json'),
@@ -491,18 +605,19 @@ async function init() {
     fetchJSON('data/exams.json'),
     fetchJSON('data/family.json'),
     fetchJSON('data/admin.json'),
-    fetchJSON('data/goals.json'),
     fetchJSON('data/routines.json'),
     fetchJSON('data/saved.json'),
+    fetchJSON('data/birthdays.json'),
   ]);
 
   renderHeader(config);
   renderNarrative(narrative);
+  renderWeather();
   renderWeek(calendar);
   renderKids(config, homework, exams);
+  renderBirthdays(birthdays);
   renderFamily(family);
   renderAdmin(admin);
-  renderGoals(goals);
   renderRoutines(routines);
   renderSaved(saved);
   renderSlideshow();

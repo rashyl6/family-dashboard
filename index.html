@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,7 @@
       style="padding:10px 16px;border-radius:8px;border:none;font-size:1rem;width:220px;text-align:center;">
     <button onclick="checkPassword()"
       style="padding:10px 24px;border-radius:8px;border:none;background:#7B5EA7;color:#fff;font-size:1rem;cursor:pointer;">Enter</button>
-    <p id="password-error" style="color:#ff6b6b;font-family:sans-serif;font-size:0.9rem;display:none;">Wrong password</p>
+    <p id="password-error" style="color:#ff6b6b;font-family:sans-serif;font-size:0.9rem;display:none;">Fel lösenord</p>
   </div>
 
   <script>
@@ -64,18 +64,29 @@
          SECTION 2 — THIS WEEK BY CLAUDE
     ═══════════════════════════════════════════════════════ -->
     <section class="card narrative-card" id="section-narrative">
-      <div class="card-label">This week, by Claude</div>
-      <blockquote id="narrative-text" class="narrative-text">
-        Loading…
-      </blockquote>
+      <div class="card-label">Veckans läge</div>
+      <div id="narrative-text" class="narrative-text">
+        Laddar…
+      </div>
       <p class="narrative-meta" id="narrative-meta"></p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2.5 — WEATHER
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card weather-card" id="section-weather">
+      <h2 class="card-title">Väder i Malmö</h2>
+      <div id="weather-content">
+        <div id="weather-today" class="weather-today">Laddar väder…</div>
+        <div id="weather-forecast" class="weather-forecast"></div>
+      </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 3 — THE WEEK AHEAD (7-day strip)
     ═══════════════════════════════════════════════════════ -->
     <section class="card" id="section-calendar">
-      <h2 class="card-title">The Week Ahead</h2>
+      <h2 class="card-title">Veckans schema</h2>
       <div class="week-strip" id="week-strip">
         <!-- Populated by script.js -->
       </div>
@@ -85,7 +96,7 @@
          SECTION 4 — KIDS' CORNER
     ═══════════════════════════════════════════════════════ -->
     <section class="card" id="section-kids">
-      <h2 class="card-title">Kids' Corner</h2>
+      <h2 class="card-title">Barnhörnan</h2>
       <div class="tab-bar" id="kids-tabs">
         <button class="tab-btn active" data-kid="Klara" style="--kid-color:#7B5EA7">Klara</button>
         <button class="tab-btn" data-kid="Ebbe" style="--kid-color:#2E86AB">Ebbe</button>
@@ -97,10 +108,18 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
+         SECTION 4.5 — BIRTHDAYS
+    ═══════════════════════════════════════════════════════ -->
+    <section class="card" id="section-birthdays">
+      <h2 class="card-title">Kommande födelsedagar</h2>
+      <div id="birthdays-list"><!-- Populated by script.js --></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
          SECTION 5 — FAMILY LIFE
     ═══════════════════════════════════════════════════════ -->
     <section class="card" id="section-family">
-      <h2 class="card-title">Family Life</h2>
+      <h2 class="card-title">Familjeliv</h2>
       <div id="family-plans">
         <!-- Populated by script.js -->
       </div>
@@ -110,7 +129,7 @@
          SECTION 6 — HOUSE & ADMIN
     ═══════════════════════════════════════════════════════ -->
     <section class="card" id="section-admin">
-      <h2 class="card-title">House &amp; Admin</h2>
+      <h2 class="card-title">Hus &amp; Admin</h2>
       <div id="admin-list">
         <!-- Populated by script.js -->
       </div>
@@ -120,7 +139,7 @@
          SECTION 8 — FAMILY ROUTINES
     ═══════════════════════════════════════════════════════ -->
     <section class="card" id="section-routines">
-      <h2 class="card-title">Family Routines</h2>
+      <h2 class="card-title">Familjerutiner</h2>
       <div id="routines-grid" class="routines-grid">
         <!-- Populated by script.js -->
       </div>
@@ -130,7 +149,7 @@
          SECTION 9 — SAVED BY US
     ═══════════════════════════════════════════════════════ -->
     <section class="card saved-card" id="section-saved">
-      <h2 class="card-title">Saved by Us</h2>
+      <h2 class="card-title">Sparat av oss</h2>
       <div id="saved-display">
         <!-- Populated by script.js — shows one item at a time, rotates -->
       </div>
@@ -145,13 +164,13 @@
          SECTION 10 — PHOTO SLIDESHOW
     ═══════════════════════════════════════════════════════ -->
     <section class="card slideshow-card" id="section-slideshow">
-      <h2 class="card-title">Photos</h2>
+      <h2 class="card-title">Foton</h2>
       <div class="slideshow-container" id="slideshow">
         <div class="slideshow-placeholder" id="slideshow-placeholder">
           <div class="placeholder-inner">
             <span class="placeholder-icon">📸</span>
-            <p>Add photos to the <code>photos/</code> folder</p>
-            <p class="placeholder-sub">Supported: JPG, PNG, WEBP, GIF</p>
+            <p>Lägg till foton i <code>photos/</code>-mappen</p>
+            <p class="placeholder-sub">Format: JPG, PNG, WEBP, GIF</p>
           </div>
         </div>
         <div id="slideshow-slides" class="slideshow-slides"></div>
@@ -167,7 +186,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Updated by Claude · <span id="footer-date"></span></p>
+    <p>Uppdaterad av Claude · <span id="footer-date"></span></p>
   </footer>
 
   <script src="script.js"></script>
