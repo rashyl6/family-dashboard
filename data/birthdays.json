@@ -13,6 +13,20 @@
       "year": null,
       "color": "#4A5568",
       "relation": "family"
+    },
+    {
+      "name": "Klara",
+      "date": "08-05",
+      "year": 2015,
+      "color": "#7B5EA7",
+      "relation": "family"
+    },
+    {
+      "name": "Ebbe",
+      "date": "11-16",
+      "year": 2017,
+      "color": "#2E86AB",
+      "relation": "family"
     }
   ]
 }
