@@ -590,7 +590,7 @@ function renderBirthdays(data) {
         <div class="birthday-name">${b.name}${ageLabel}</div>
         <div class="birthday-date">${b.next.toLocaleDateString('sv-SE', { day: 'numeric', month: 'long' })}</div>
       </div>
-      <div class="birthday-days ${b.days === 0 ? 'urgent' : b.days <= 7 ? 'warning' : ''}">${daysLabel}</div>
+      <div class="birthday-countdown${b.days === 0 ? ' soon' : b.days <= 7 ? ' soon' : ''}">${daysLabel}</div>
     </div>`;
   }).join('');
 }
