@@ -1,6 +1,24 @@
 {
   "items": [
     {
+      "id": "pasklov-signup",
+      "title": "Påsklov — anmälan öppen",
+      "due": "2026-03-10",
+      "category": "school",
+      "note": "Anmälan öppnade 5 mars. Gäller fritids under påsklovet.",
+      "remind_months_before": 0,
+      "icon": "📝"
+    },
+    {
+      "id": "tempus-summer-lo",
+      "title": "Schemalägg Lo sommarperiod 2026",
+      "due": "2026-03-10",
+      "category": "school",
+      "note": "Malmö Förskola vill ha in schematider för sommarperioden. Gör det i Tempus så snart som möjligt.",
+      "remind_months_before": 0,
+      "icon": "☀️"
+    },
+    {
       "id": "car-service",
       "title": "Car service",
       "due": "2027-02-15",

@@ -1,32 +1,117 @@
 {
-  "weekStart": "2026-03-02",
+  "weekStart": "2026-03-09",
   "events": [
     {
-      "date": "2026-03-04",
-      "day": "Wednesday",
-      "title": "Dashboard launched",
+      "date": "2026-03-06",
+      "day": "Friday",
+      "title": "Ebbe parkour",
+      "who": "Ebbe",
+      "time": "17:00–18:15",
+      "color": "#2E86AB",
+      "type": "kids"
+    },
+    {
+      "date": "2026-03-08",
+      "day": "Sunday",
+      "title": "Frilufsarna Grodan – Lägerplatsen Holmeja",
       "who": "Family",
-      "time": "",
+      "time": "10:00–14:00",
+      "color": "#4A5568",
+      "type": "family",
+      "note": "Samlingsplats: vid bommen på parkeringen. Ledare: Johanna & Helena 0708-43 89 60"
+    },
+    {
+      "date": "2026-03-09",
+      "day": "Monday",
+      "title": "Utv samtal Ebbe",
+      "who": "Ebbe",
+      "time": "16:00–17:00",
+      "color": "#2E86AB",
+      "type": "kids"
+    },
+    {
+      "date": "2026-03-10",
+      "day": "Tuesday",
+      "title": "Middag med Kjartansdottir",
+      "who": "Family",
+      "time": "18:00",
       "color": "#4A5568",
       "type": "family"
     },
     {
-      "date": "2026-03-05",
-      "day": "Thursday",
-      "title": "Klara — football practice",
+      "date": "2026-03-10",
+      "day": "Tuesday",
+      "title": "Klara gymnastik",
       "who": "Klara",
-      "time": "16:00",
+      "time": "19:00–20:00",
       "color": "#7B5EA7",
       "type": "kids"
     },
     {
-      "date": "2026-03-07",
-      "day": "Saturday",
-      "title": "Family weekend",
-      "who": "Family",
-      "time": "",
+      "date": "2026-03-10",
+      "day": "Tuesday",
+      "title": "Möte med Framtidsgruppen",
+      "who": "Rasmus",
+      "time": "20:00–21:00",
       "color": "#4A5568",
       "type": "family"
+    },
+    {
+      "date": "2026-03-11",
+      "day": "Wednesday",
+      "title": "Hopprep",
+      "who": "Family",
+      "time": "17:00–18:00",
+      "color": "#4A5568",
+      "type": "family"
+    },
+    {
+      "date": "2026-03-13",
+      "day": "Friday",
+      "title": "Lo – 5-year health visit (BVC)",
+      "who": "Lo",
+      "time": "08:30–09:30",
+      "color": "#F4845F",
+      "type": "kids",
+      "note": "Emma Barnavård på Cura, Erikslustvägen 22, Malmö. Nurse: Anna Ranstett."
+    },
+    {
+      "date": "2026-03-13",
+      "day": "Friday",
+      "title": "Ebbe parkour",
+      "who": "Ebbe",
+      "time": "17:00–18:15",
+      "color": "#2E86AB",
+      "type": "kids"
+    },
+    {
+      "date": "2026-03-14",
+      "day": "Saturday",
+      "title": "Camilla",
+      "who": "Family",
+      "time": "15:00–16:00",
+      "color": "#4A5568",
+      "type": "family"
+    },
+    {
+      "date": "2026-03-15",
+      "day": "Sunday",
+      "title": "Ebbe – Strövarna Kattugglorna",
+      "who": "Ebbe",
+      "time": "09:30–13:30",
+      "color": "#2E86AB",
+      "type": "kids",
+      "note": "Lyckevägens parkering, Torupsvägen 316, Svedala. Ledare: Henrik Bengtsson."
+    },
+    {
+      "date": "2026-03-15",
+      "day": "Sunday",
+      "title": "Lo – Skogsmulle Björnarna",
+      "who": "Lo",
+      "time": "10:00–12:00",
+      "color": "#F4845F",
+      "type": "kids",
+      "note": "Lyckevägens parkering, Svedala. Förälder/vuxen är med. Ledare: Urban Åström 0760-27 72 03."
     }
   ]
 }
