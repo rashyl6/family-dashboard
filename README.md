@@ -9,29 +9,39 @@ A living family dashboard for a family of 5.
 
 ### Viewing the dashboard
 
-- **Locally:** Open `index.html` in any browser. Works instantly.
-- **Live site:** Push to GitHub → enable GitHub Pages → access at `https://[username].github.io/family-dashboard/`
+- **Locally:** Open `index.html` in any browser. Password: see family.
+- **Live site:** https://rashyl6.github.io/family-dashboard/ (password protected)
 
 ### Adding photos
 
 1. Drop photo files (JPG, PNG, WEBP) into the `photos/` folder
-2. Create or update `photos/manifest.json` listing the filenames:
+2. Update `photos/manifest.json` with the filenames:
    ```json
-   { "photos": ["photo1.jpg", "holiday2025.jpg", "klara-birthday.jpg"] }
+   { "photos": ["photo1.jpg", "holiday2025.jpg"] }
    ```
-3. Refresh the page — slideshow appears automatically
+3. Refresh — slideshow appears automatically
 
-### Monday update (Claude does this)
+### Weekly update (Claude does this)
 
-Every Monday, Claude:
-1. Reads Gmail (school emails, invites, anything relevant)
-2. Reads Google Calendar (next 2 weeks)
-3. Reviews `knowledge/family-memory.md`
-4. Chats with you about anything not in email/calendar
-5. Updates all JSON files in `data/`
-6. Writes the weekly narrative in `data/narrative.json`
-7. Pushes to GitHub → site is live in ~30 seconds
-8. Updates `knowledge/family-memory.md` with any new facts
+Say **"Let's do the Monday update"** or **"Let's do the Friday update"** and Claude will:
+1. Read Gmail — school emails (Unikum, Tempus), invites, anything relevant
+2. Read Google Calendar — all family calendars for the next 2 weeks
+3. Review `knowledge/family-memory.md`
+4. Update all JSON files in `data/`
+5. Write the weekly narrative in `data/narrative.json`
+6. Push to GitHub → live in ~60 seconds
+7. Update `knowledge/family-memory.md` with any new facts
+
+---
+
+## Integrations (all automatic)
+
+| Source | What we get | How |
+|--------|-------------|-----|
+| Google Calendar | All events (Family, Klara, Maria, Rasmus work, Swedish holidays) | claude.ai native |
+| Gmail | Unikum school notifications, Tempus förskola alerts, invites | claude.ai native |
+
+**If Gmail or Calendar stops working:** type `/mcp` in Claude Code → click the broken integration → re-authenticate. Takes 30 seconds.
 
 ---
 
@@ -47,15 +57,14 @@ family-dashboard/
 │   ├── narrative.json      # Claude's weekly summary
 │   ├── calendar.json       # This week's events
 │   ├── homework.json       # Kids' homework tasks
-│   ├── exams.json          # Upcoming exams
+│   ├── exams.json          # Upcoming exams/prov
 │   ├── family.json         # Adult social plans
 │   ├── admin.json          # House/admin reminders
-│   ├── goals.json          # Family goals + progress
 │   ├── routines.json       # Family rituals
 │   └── saved.json          # Quotes, memories, notes
 ├── photos/
 │   ├── manifest.json       # List of photo filenames
-│   └── [your photos]       # Add photos here
+│   └── [your photos]
 ├── knowledge/
 │   └── family-memory.md    # Claude's long-term knowledge base
 └── README.md               # This file
@@ -69,63 +78,25 @@ family-dashboard/
 Family name and kid colours. Edit once, never touch again.
 
 ### `data/narrative.json`
-Claude's weekly text. Replaced every Monday.
-```json
-{
-  "week": "2026-03-02",
-  "updatedAt": "2026-03-04",
-  "text": "Your narrative here..."
-}
-```
+Claude's weekly text. Replaced each update.
 
 ### `data/calendar.json`
-Events for the 7-day strip. Claude pulls from Google Calendar.
-- `date`: YYYY-MM-DD
-- `who`: person name or "Family"
-- `color`: hex code (use kid/adult colours from config)
+Events for the next 7 days. Claude pulls from Google Calendar automatically.
 
 ### `data/homework.json`
 Kids' tasks. Set `"done": true` when completed.
 
 ### `data/exams.json`
-Upcoming exams with countdown. Claude adds from school emails.
-
-### `data/family.json`
-Social plans, date nights, weekend activities.
+Upcoming prov/exams with countdown.
 
 ### `data/admin.json`
-House reminders with countdowns. Claude tracks service intervals automatically.
-- `remind_months_before`: how early to flag it as upcoming
-
-### `data/goals.json`
-Progress bars. Claude updates `current` values weekly.
-- `target` and `current` are numbers
-- `unit` is the label (kr, books, rides, etc.)
+House reminders with countdowns (dentist, car service, insurance etc).
 
 ### `data/routines.json`
-Family rituals displayed permanently. Rarely changes.
+Family rituals displayed permanently.
 
 ### `data/saved.json`
-Quotes, memories, notes. You tell Claude to add something → it appears in the dashboard.
-- `type`: "quote", "memory", or "note"
-- `attribution`: optional, for quotes
-
----
-
-## GitHub Pages Setup (one-time)
-
-1. Create a GitHub repo (can be private)
-2. Push all files to the `main` branch
-3. Go to repo Settings → Pages → Source: `main` branch, root `/`
-4. Site is live at `https://[username].github.io/family-dashboard/`
-
-To let Claude push automatically:
-1. Create a Personal Access Token (GitHub → Settings → Developer Settings → Fine-grained tokens)
-2. Permissions: `Contents` (read + write), `Pages` (read + write)
-3. Add the GitHub MCP to Claude Code:
-   ```
-   claude mcp add github -e GITHUB_TOKEN=<your_token> -- npx -y @modelcontextprotocol/server-github
-   ```
+Quotes, memories, notes. Tell Claude to add something → it appears in the dashboard.
 
 ---
 
@@ -140,15 +111,11 @@ To let Claude push automatically:
 
 ---
 
-## Trigger Phrase for Updates
+## Security
 
-Just say: **"Let's do the Monday update"** and Claude will:
-- Read your calendar and Gmail
-- Ask about anything else happening this week
-- Update all data files
-- Write the new narrative
-- Push to GitHub
+Simple JS password gate — stops casual access, not determined attackers.
+For stronger security, migrate to Netlify with server-side basic auth.
 
 ---
 
-*Maintained by Claude · Last updated 2026-03-04*
+*Maintained by Claude · Last updated 2026-03-06*

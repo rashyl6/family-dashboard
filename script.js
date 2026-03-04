@@ -34,19 +34,19 @@ function daysUntil(dateStr) {
 function formatShortDate(dateStr) {
   const d = parseDate(dateStr);
   if (!d) return dateStr;
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  return d.toLocaleDateString('sv-SE', { day: 'numeric', month: 'short' });
 }
 
 function dayLabel(dateStr) {
   const d = parseDate(dateStr);
   if (!d) return '';
-  return d.toLocaleDateString('en-GB', { weekday: 'short' });
+  return d.toLocaleDateString('sv-SE', { weekday: 'short' });
 }
 
 function monthLabel(dateStr) {
   const d = parseDate(dateStr);
   if (!d) return '';
-  return d.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase();
+  return d.toLocaleDateString('sv-SE', { month: 'short' }).toUpperCase();
 }
 
 function dayOfMonth(dateStr) {
@@ -71,10 +71,10 @@ function urgencyClass(days) {
 function dueLabelForHw(dateStr) {
   const days = daysUntil(dateStr);
   if (days === null) return '';
-  if (days < 0)  return 'Overdue!';
-  if (days === 0) return 'Due today';
-  if (days === 1) return 'Due tomorrow';
-  return 'Due ' + formatShortDate(dateStr);
+  if (days < 0)  return 'Försenad!';
+  if (days === 0) return 'Idag!';
+  if (days === 1) return 'Imorgon';
+  return 'Inlämning ' + formatShortDate(dateStr);
 }
 
 function isUrgentHw(dateStr) {
@@ -85,7 +85,7 @@ function isUrgentHw(dateStr) {
 /* ─── Section 1 — Header ────────────────────────────────────── */
 function renderHeader(config) {
   const today = new Date();
-  const dateStr = today.toLocaleDateString('en-GB', {
+  const dateStr = today.toLocaleDateString('sv-SE', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   });
   $('header-date').textContent = dateStr;
@@ -101,7 +101,7 @@ function renderNarrative(data) {
   if (!data) return;
   $('narrative-text').textContent = data.text || '';
   if (data.updatedAt) {
-    $('narrative-meta').textContent = 'Week of ' + formatShortDate(data.week) + ' · Updated ' + formatShortDate(data.updatedAt);
+    $('narrative-meta').textContent = 'Vecka fr.o.m. ' + formatShortDate(data.week) + ' · Uppdaterad ' + formatShortDate(data.updatedAt);
   }
 }
 
@@ -135,7 +135,7 @@ function renderWeek(data) {
     const dayEl = document.createElement('div');
     dayEl.className = 'week-day' + (isToday(iso) ? ' today' : '');
 
-    const dayName = d.toLocaleDateString('en-GB', { weekday: 'short' });
+    const dayName = d.toLocaleDateString('sv-SE', { weekday: 'short' });
     const dayNum  = d.getDate();
 
     let html = `
@@ -177,7 +177,7 @@ function renderKids(config, homework, exams) {
     const hwItems = (homework && homework.tasks || []).filter(t => t.kid === kidName);
     let hwHtml = '';
     if (hwItems.length === 0) {
-      hwHtml = '<p class="no-items">No homework listed.</p>';
+      hwHtml = '<p class="no-items">Inga läxor inlagda.</p>';
     } else {
       hwItems.forEach(t => {
         const isDone = t.done;
@@ -199,12 +199,12 @@ function renderKids(config, homework, exams) {
     const examItems = (exams && exams.exams || []).filter(e => e.kid === kidName);
     let examHtml = '';
     if (examItems.length === 0) {
-      examHtml = '<p class="no-items">No upcoming exams.</p>';
+      examHtml = '<p class="no-items">Inga prov inlagda.</p>';
     } else {
       examItems.forEach(e => {
         const days = daysUntil(e.date);
-        const daysLabel = days === null ? '' : days === 0 ? 'Today!' : days === 1 ? 'Tomorrow' : days + '';
-        const daysUnit  = days > 1 ? 'days' : '';
+        const daysLabel = days === null ? '' : days === 0 ? 'Idag!' : days === 1 ? 'Imorgon' : days + '';
+        const daysUnit  = days > 1 ? 'dagar' : '';
         examHtml += `
           <div class="exam-item">
             <div class="exam-countdown" style="color:${color}">
@@ -224,11 +224,11 @@ function renderKids(config, homework, exams) {
     panel.innerHTML = `
       <div class="kid-panel active" data-kid="${kidName}">
         <div class="kid-subsection">
-          <div class="kid-subsection-title">Homework</div>
+          <div class="kid-subsection-title">Läxor</div>
           ${hwHtml}
         </div>
         <div class="kid-subsection">
-          <div class="kid-subsection-title">Upcoming Exams</div>
+          <div class="kid-subsection-title">Kommande prov</div>
           ${examHtml}
         </div>
       </div>`;
@@ -253,7 +253,7 @@ function renderFamily(data) {
   if (!container) return;
   const plans = data && data.plans ? data.plans : [];
   if (plans.length === 0) {
-    container.innerHTML = '<p class="no-items">No upcoming plans.</p>';
+    container.innerHTML = '<p class="no-items">Inga planer inlagda.</p>';
     return;
   }
   // Sort by date
@@ -281,7 +281,7 @@ function renderAdmin(data) {
   if (!container) return;
   const items = data && data.items ? data.items : [];
   if (items.length === 0) {
-    container.innerHTML = '<p class="no-items">Nothing tracked yet.</p>';
+    container.innerHTML = '<p class="no-items">Inget att hålla koll på.</p>';
     return;
   }
   // Sort by due date
@@ -292,10 +292,10 @@ function renderAdmin(data) {
     let cls = 'ok';
     if (days !== null) {
       if (days < 0) {
-        countdownDisplay = 'Overdue';
+        countdownDisplay = 'Försenad';
         cls = 'urgent';
       } else if (days === 0) {
-        countdownDisplay = 'Today';
+        countdownDisplay = 'Idag';
         cls = 'urgent';
       } else if (days < 30) {
         countdownDisplay = days + 'd';
@@ -330,7 +330,7 @@ function renderGoals(data) {
   if (!container) return;
   const goals = data && data.goals ? data.goals : [];
   if (goals.length === 0) {
-    container.innerHTML = '<p class="no-items">No goals set yet.</p>';
+    container.innerHTML = '<p class="no-items">Inga mål inlagda.</p>';
     return;
   }
   container.innerHTML = goals.map(g => {
@@ -360,7 +360,7 @@ function renderRoutines(data) {
   if (!container) return;
   const routines = data && data.routines ? data.routines : [];
   if (routines.length === 0) {
-    container.innerHTML = '<p class="no-items">No routines listed.</p>';
+    container.innerHTML = '<p class="no-items">Inga rutiner inlagda.</p>';
     return;
   }
   container.innerHTML = routines.map(r => `
@@ -383,7 +383,7 @@ function renderSaved(data) {
 
   const items = data && data.items ? data.items : [];
   if (items.length === 0) {
-    display.innerHTML = '<div class="saved-item"><p class="saved-content">Nothing saved yet.</p></div>';
+    display.innerHTML = '<div class="saved-item"><p class="saved-content">Inget sparat än.</p></div>';
     return;
   }
 
@@ -392,7 +392,7 @@ function renderSaved(data) {
   function show(i) {
     idx = (i + items.length) % items.length;
     const item = items[idx];
-    const typeLabel = item.type === 'quote' ? 'Quote' : item.type === 'memory' ? 'Memory' : 'Note';
+    const typeLabel = item.type === 'quote' ? 'Citat' : item.type === 'memory' ? 'Minne' : 'Anteckning';
     display.innerHTML = `
       <div class="saved-item">
         <div class="saved-type-label">${typeLabel}</div>
@@ -437,7 +437,7 @@ function renderSlideshow() {
       slide.className = 'slide' + (i === 0 ? ' active' : '');
       const img = document.createElement('img');
       img.src = 'photos/' + src;
-      img.alt = 'Family photo ' + (i + 1);
+      img.alt = 'Familjefoto ' + (i + 1);
       slide.appendChild(img);
       slidesEl.appendChild(slide);
 
