@@ -4,7 +4,7 @@
     {
       "date": "2026-03-05",
       "day": "Thursday",
-      "title": "Los fodelsedag!",
+      "title": "Los födelsedag!",
       "who": "Lo",
       "time": "",
       "color": "#F4845F",
@@ -34,7 +34,7 @@
     {
       "date": "2026-03-09",
       "day": "Monday",
-      "title": "Forskolan stanger kl 15",
+      "title": "Förskolan stänger kl 15",
       "who": "Lo",
       "time": "15:00",
       "color": "#F4845F",
@@ -89,7 +89,7 @@
     {
       "date": "2026-03-13",
       "day": "Friday",
-      "title": "Lo BVC 5-arskontroll",
+      "title": "Lo BVC 5-årskontroll",
       "who": "Lo",
       "time": "08:30-09:30",
       "color": "#F4845F",
@@ -117,22 +117,22 @@
     {
       "date": "2026-03-15",
       "day": "Sunday",
-      "title": "Strovarna Kattugglorna",
+      "title": "Strövarna Kattugglorna",
       "who": "Ebbe",
       "time": "09:30-13:30",
       "color": "#2E86AB",
       "type": "kids",
-      "note": "Lyckevagen, Svedala. Henrik Bengtsson."
+      "note": "Lyckevägen, Svedala. Henrik Bengtsson."
     },
     {
       "date": "2026-03-15",
       "day": "Sunday",
-      "title": "Skogsmulle Bjornarna",
+      "title": "Skogsmulle Björnarna",
       "who": "Lo",
       "time": "10:00-12:00",
       "color": "#F4845F",
       "type": "kids",
-      "note": "Lyckevagen, Svedala. Foralder med. Urban Astrom."
+      "note": "Lyckevägen, Svedala. Förälder med. Urban Åström."
     },
     {
       "date": "2026-03-17",
@@ -143,12 +143,12 @@
       "color": "#4A5568",
       "type": "family",
       "allDay": true,
-      "note": "Fritidshemmen oppna."
+      "note": "Fritidshemmen öppna."
     },
     {
       "date": "2026-03-25",
       "day": "Wednesday",
-      "title": "Digitaltraff: Unga & media",
+      "title": "Digitalträff: Unga & media",
       "who": "Family",
       "time": "17:00-19:00",
       "color": "#4A5568",

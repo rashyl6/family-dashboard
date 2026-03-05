@@ -2,10 +2,10 @@
   "items": [
     {
       "id": "pasklov-signup",
-      "title": "Pasklov anmalan",
+      "title": "Påsklov anmälan",
       "due": "2026-03-10",
       "category": "school",
-      "note": "Anmalan oppnade 5 mars. Fritids under pasklovet.",
+      "note": "Anmälan öppnade 5 mars. Fritids under påsklovet.",
       "remind_months_before": 0,
       "icon": "📝"
     },
@@ -14,7 +14,7 @@
       "title": "Los sommarschema i Tempus",
       "due": "2026-03-10",
       "category": "school",
-      "note": "Skicka in schematider for sommarperioden.",
+      "note": "Skicka in schematider för sommarperioden.",
       "remind_months_before": 0,
       "icon": "☀️"
     },
@@ -23,16 +23,16 @@
       "title": "Studiedag 17 mars",
       "due": "2026-03-17",
       "category": "school",
-      "note": "Ingen undervisning. Fritids oppna.",
+      "note": "Ingen undervisning. Fritids öppna.",
       "remind_months_before": 0,
       "icon": "🏫"
     },
     {
-      "id": "digitaltraff-sspf",
-      "title": "Digitaltraff: Unga och sociala medier",
+      "id": "digitalträff-sspf",
+      "title": "Digitalträff: Unga och sociala medier",
       "due": "2026-03-25",
       "category": "school",
-      "note": "SSPF foraldratraff kl 17-19 via Teams.",
+      "note": "SSPF föräldraträff kl 17-19 via Teams.",
       "remind_months_before": 0,
       "icon": "💻"
     },
@@ -41,22 +41,22 @@
       "title": "Lovdag 15 maj",
       "due": "2026-05-15",
       "category": "school",
-      "note": "Fritidshemmen oppna.",
+      "note": "Fritidshemmen öppna.",
       "remind_months_before": 0,
       "icon": "🏫"
     },
     {
       "id": "dentist-klara",
-      "title": "Klara tandlakare",
+      "title": "Klara tandläkare",
       "due": "2026-06-01",
       "category": "health",
-      "note": "Boka for juni, ring Folktandvarden.",
+      "note": "Boka för juni, ring Folktandvården.",
       "remind_months_before": 1,
       "icon": "🦷"
     },
     {
       "id": "dentist-ebbe",
-      "title": "Ebbe tandlakare",
+      "title": "Ebbe tandläkare",
       "due": "2026-06-01",
       "category": "health",
       "note": "Boka samma dag som Klara.",
@@ -65,19 +65,19 @@
     },
     {
       "id": "fritids-stangd",
-      "title": "Fritidshemmen stangda",
+      "title": "Fritidshemmen stängda",
       "due": "2026-06-15",
       "category": "school",
-      "note": "Fritids stangda hela dagen.",
+      "note": "Fritids stängda hela dagen.",
       "remind_months_before": 0,
       "icon": "🏫"
     },
     {
       "id": "home-insurance",
-      "title": "Hemforsakring fornyelse",
+      "title": "Hemförsäkring förnyelse",
       "due": "2026-09-01",
       "category": "finance",
-      "note": "Jamfor Hedvig och Lansforsakringar.",
+      "note": "Jämför Hedvig och Länsförsäkringar.",
       "remind_months_before": 2,
       "icon": "🏠"
     },
@@ -92,10 +92,10 @@
     },
     {
       "id": "passport-klara",
-      "title": "Klaras pass gar ut",
+      "title": "Klaras pass går ut",
       "due": "2027-08-10",
       "category": "documents",
-      "note": "Fornya varen 2027.",
+      "note": "Förnya våren 2027.",
       "remind_months_before": 3,
       "icon": "📘"
     }
