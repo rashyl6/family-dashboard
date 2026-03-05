@@ -77,6 +77,15 @@
 
 ---
 
+## Work Calendar Integration
+
+- Rasmus work calendar ID: `chksv97mnqbhtudhdpi6471muhalmohb@import.calendar.google.com`
+- Only family-relevant work events show on dashboard: business trips, travel, early/late days, after-hours events
+- Show as: "Pappa reser: [destination]" or "Pappa borta" — clear titles, no work jargon
+- Use `"who": "Rasmus"`, `"type": "work"`, `"color": "#4A5568"`
+
+---
+
 ## Recurring Things to Watch For
 
 - Passports — Klara's expires August 2027, renew spring 2027
@@ -110,6 +119,7 @@
 | 2026-03-05 | Weather forecast aligned to same 2-week Mon-Sun grid as calendar. |
 | 2026-03-05 | All Swedish characters (åäö) fixed across all data files. |
 | 2026-03-05 | "Dangerous Men" poem added to Saved by Us section. |
+| 2026-03-05 | Work calendar integrated — business trips and family-affecting work events show on dashboard. |
 | 2026-03-05 | Narrative style: weekly perspective ("den här veckan") not day-anchored. |
 
 *Claude: append new rows to the Log table as facts emerge. Update sections above when stable patterns are confirmed.*
