@@ -2,64 +2,100 @@
   "items": [
     {
       "id": "pasklov-signup",
-      "title": "Påsklov — anmälan öppen",
+      "title": "Pasklov anmalan",
       "due": "2026-03-10",
       "category": "school",
-      "note": "Anmälan öppnade 5 mars. Gäller fritids under påsklovet.",
+      "note": "Anmalan oppnade 5 mars. Fritids under pasklovet.",
       "remind_months_before": 0,
       "icon": "📝"
     },
     {
       "id": "tempus-summer-lo",
-      "title": "Schemalägg Lo sommarperiod 2026",
+      "title": "Los sommarschema i Tempus",
       "due": "2026-03-10",
       "category": "school",
-      "note": "Malmö Förskola vill ha in schematider för sommarperioden. Gör det i Tempus så snart som möjligt.",
+      "note": "Skicka in schematider for sommarperioden.",
       "remind_months_before": 0,
       "icon": "☀️"
     },
     {
-      "id": "car-service",
-      "title": "Car service",
-      "due": "2027-02-15",
-      "category": "car",
-      "note": "Last serviced Feb 2026. Book at Opus when due.",
-      "remind_months_before": 2,
-      "icon": "🚗"
+      "id": "studiedag-mars",
+      "title": "Studiedag 17 mars",
+      "due": "2026-03-17",
+      "category": "school",
+      "note": "Ingen undervisning. Fritids oppna.",
+      "remind_months_before": 0,
+      "icon": "🏫"
+    },
+    {
+      "id": "digitaltraff-sspf",
+      "title": "Digitaltraff: Unga och sociala medier",
+      "due": "2026-03-25",
+      "category": "school",
+      "note": "SSPF foraldratraff kl 17-19 via Teams.",
+      "remind_months_before": 0,
+      "icon": "💻"
+    },
+    {
+      "id": "lovdag-maj",
+      "title": "Lovdag 15 maj",
+      "due": "2026-05-15",
+      "category": "school",
+      "note": "Fritidshemmen oppna.",
+      "remind_months_before": 0,
+      "icon": "🏫"
     },
     {
       "id": "dentist-klara",
-      "title": "Klara — dentist check-up",
+      "title": "Klara tandlakare",
       "due": "2026-06-01",
       "category": "health",
-      "note": "Book for June — call Folktandvården.",
+      "note": "Boka for juni, ring Folktandvarden.",
       "remind_months_before": 1,
       "icon": "🦷"
     },
     {
       "id": "dentist-ebbe",
-      "title": "Ebbe — dentist check-up",
+      "title": "Ebbe tandlakare",
       "due": "2026-06-01",
       "category": "health",
-      "note": "Same as Klara — try to book on same day.",
+      "note": "Boka samma dag som Klara.",
       "remind_months_before": 1,
       "icon": "🦷"
     },
     {
+      "id": "fritids-stangd",
+      "title": "Fritidshemmen stangda",
+      "due": "2026-06-15",
+      "category": "school",
+      "note": "Fritids stangda hela dagen.",
+      "remind_months_before": 0,
+      "icon": "🏫"
+    },
+    {
       "id": "home-insurance",
-      "title": "Home insurance renewal",
+      "title": "Hemforsakring fornyelse",
       "due": "2026-09-01",
       "category": "finance",
-      "note": "Compare prices with Hedvig and Länsförsäkringar before renewing.",
+      "note": "Jamfor Hedvig och Lansforsakringar.",
       "remind_months_before": 2,
       "icon": "🏠"
     },
     {
+      "id": "car-service",
+      "title": "Bilservice",
+      "due": "2027-02-15",
+      "category": "car",
+      "note": "Senaste feb 2026. Boka Opus.",
+      "remind_months_before": 2,
+      "icon": "🚗"
+    },
+    {
       "id": "passport-klara",
-      "title": "Klara's passport expires",
+      "title": "Klaras pass gar ut",
       "due": "2027-08-10",
       "category": "documents",
-      "note": "Renew in spring 2027 before summer travel.",
+      "note": "Fornya varen 2027.",
       "remind_months_before": 3,
       "icon": "📘"
     }

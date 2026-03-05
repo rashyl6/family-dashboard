@@ -1,38 +1,59 @@
 {
-  "weekStart": "2026-03-09",
+  "weekStart": "2026-03-02",
   "events": [
+    {
+      "date": "2026-03-05",
+      "day": "Thursday",
+      "title": "Los fodelsedag!",
+      "who": "Lo",
+      "time": "",
+      "color": "#F4845F",
+      "type": "kids",
+      "allDay": true,
+      "note": "Lo fyller 5!"
+    },
     {
       "date": "2026-03-06",
       "day": "Friday",
       "title": "Ebbe parkour",
       "who": "Ebbe",
-      "time": "17:00–18:15",
+      "time": "17:00-18:15",
       "color": "#2E86AB",
       "type": "kids"
     },
     {
       "date": "2026-03-08",
       "day": "Sunday",
-      "title": "Frilufsarna Grodan – Lägerplatsen Holmeja",
+      "title": "Frilufsarna Grodan",
       "who": "Family",
-      "time": "10:00–14:00",
+      "time": "10:00-14:00",
       "color": "#4A5568",
       "type": "family",
-      "note": "Samlingsplats: vid bommen på parkeringen. Ledare: Johanna & Helena 0708-43 89 60"
+      "note": "Vid bommen. Johanna & Helena 0708-43 89 60"
+    },
+    {
+      "date": "2026-03-09",
+      "day": "Monday",
+      "title": "Forskolan stanger kl 15",
+      "who": "Lo",
+      "time": "15:00",
+      "color": "#F4845F",
+      "type": "kids",
+      "note": "Verksamhetsutveckling och APT"
     },
     {
       "date": "2026-03-09",
       "day": "Monday",
       "title": "Utv samtal Ebbe",
       "who": "Ebbe",
-      "time": "16:00–17:00",
+      "time": "16:00-17:00",
       "color": "#2E86AB",
       "type": "kids"
     },
     {
       "date": "2026-03-10",
       "day": "Tuesday",
-      "title": "Middag med Kjartansdottir",
+      "title": "Middag Kjartansdottir",
       "who": "Family",
       "time": "18:00",
       "color": "#4A5568",
@@ -43,16 +64,16 @@
       "day": "Tuesday",
       "title": "Klara gymnastik",
       "who": "Klara",
-      "time": "19:00–20:00",
+      "time": "19:00-20:00",
       "color": "#7B5EA7",
       "type": "kids"
     },
     {
       "date": "2026-03-10",
       "day": "Tuesday",
-      "title": "Möte med Framtidsgruppen",
+      "title": "Framtidsgruppen",
       "who": "Rasmus",
-      "time": "20:00–21:00",
+      "time": "20:00-21:00",
       "color": "#4A5568",
       "type": "family"
     },
@@ -61,26 +82,26 @@
       "day": "Wednesday",
       "title": "Hopprep",
       "who": "Family",
-      "time": "17:00–18:00",
+      "time": "17:00-18:00",
       "color": "#4A5568",
       "type": "family"
     },
     {
       "date": "2026-03-13",
       "day": "Friday",
-      "title": "Lo – 5-year health visit (BVC)",
+      "title": "Lo BVC 5-arskontroll",
       "who": "Lo",
-      "time": "08:30–09:30",
+      "time": "08:30-09:30",
       "color": "#F4845F",
       "type": "kids",
-      "note": "Emma Barnavård på Cura, Erikslustvägen 22, Malmö. Nurse: Anna Ranstett."
+      "note": "Cura, Erikslustv. 22. Anna Ranstett."
     },
     {
       "date": "2026-03-13",
       "day": "Friday",
       "title": "Ebbe parkour",
       "who": "Ebbe",
-      "time": "17:00–18:15",
+      "time": "17:00-18:15",
       "color": "#2E86AB",
       "type": "kids"
     },
@@ -89,29 +110,50 @@
       "day": "Saturday",
       "title": "Camilla",
       "who": "Family",
-      "time": "15:00–16:00",
+      "time": "15:00-16:00",
       "color": "#4A5568",
       "type": "family"
     },
     {
       "date": "2026-03-15",
       "day": "Sunday",
-      "title": "Ebbe – Strövarna Kattugglorna",
+      "title": "Strovarna Kattugglorna",
       "who": "Ebbe",
-      "time": "09:30–13:30",
+      "time": "09:30-13:30",
       "color": "#2E86AB",
       "type": "kids",
-      "note": "Lyckevägens parkering, Torupsvägen 316, Svedala. Ledare: Henrik Bengtsson."
+      "note": "Lyckevagen, Svedala. Henrik Bengtsson."
     },
     {
       "date": "2026-03-15",
       "day": "Sunday",
-      "title": "Lo – Skogsmulle Björnarna",
+      "title": "Skogsmulle Bjornarna",
       "who": "Lo",
-      "time": "10:00–12:00",
+      "time": "10:00-12:00",
       "color": "#F4845F",
       "type": "kids",
-      "note": "Lyckevägens parkering, Svedala. Förälder/vuxen är med. Ledare: Urban Åström 0760-27 72 03."
+      "note": "Lyckevagen, Svedala. Foralder med. Urban Astrom."
+    },
+    {
+      "date": "2026-03-17",
+      "day": "Tuesday",
+      "title": "Studiedag",
+      "who": "Family",
+      "time": "",
+      "color": "#4A5568",
+      "type": "family",
+      "allDay": true,
+      "note": "Fritidshemmen oppna."
+    },
+    {
+      "date": "2026-03-25",
+      "day": "Wednesday",
+      "title": "Digitaltraff: Unga & media",
+      "who": "Family",
+      "time": "17:00-19:00",
+      "color": "#4A5568",
+      "type": "family",
+      "note": "SSPF via Teams. ID: 363 216 102 101 93"
     }
   ]
 }

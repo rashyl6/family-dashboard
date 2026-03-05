@@ -284,6 +284,24 @@ body {
 
 /* ─── Section 3: Week Ahead ─────────────────────────────────── */
 .week-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.week-section {}
+
+.week-row-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.25rem;
+}
+
+.week-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.35rem;
@@ -343,6 +361,17 @@ body {
   font-weight: 700;
   opacity: 0.65;
   display: block;
+}
+
+
+.week-day.past {
+  opacity: 0.5;
+}
+
+.week-event.all-day {
+  font-weight: 600;
+  border-left-width: 4px;
+  font-size: 0.6rem;
 }
 
 /* ─── Section 4: Kids' Corner ───────────────────────────────── */

@@ -1,3 +1,18 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "kid": "Klara",
+      "subject": "Svenska",
+      "task": "Laslaxa (till och med mandag)",
+      "due": "2026-03-09",
+      "done": false
+    },
+    {
+      "kid": "Klara",
+      "subject": "Svenska",
+      "task": "Skrivprojekt: boken Huset (pagaende)",
+      "due": "2026-04-01",
+      "done": false
+    }
+  ]
 }

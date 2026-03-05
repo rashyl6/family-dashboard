@@ -1,3 +1,28 @@
 {
-  "plans": []
+  "plans": [
+    {
+      "date": "2026-03-17",
+      "title": "Studiedag Kulladalsskolan",
+      "type": "family",
+      "notes": "Fritidshemmen oppna. Ingen undervisning."
+    },
+    {
+      "date": "2026-03-25",
+      "title": "Digitaltraff: Unga och sociala medier (SSPF)",
+      "type": "social",
+      "notes": "Digital foraldratraff kl 17-19 via Teams."
+    },
+    {
+      "date": "2026-05-15",
+      "title": "Lovdag Kulladalsskolan",
+      "type": "family",
+      "notes": "Fritidshemmen oppna."
+    },
+    {
+      "date": "2026-06-15",
+      "title": "Fritidshemmen stangda",
+      "type": "family",
+      "notes": "Fritids stangda hela dagen."
+    }
+  ]
 }

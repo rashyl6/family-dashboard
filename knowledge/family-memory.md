@@ -96,4 +96,12 @@
 
 ---
 
+| 2026-03-05 | Lo's birth year corrected to 2021 (was 2020). She turns 5 today. |
+| 2026-03-05 | Klara is in class 4C. New mentor: Gabriella Khalaf (replaced Angjelina). |
+| 2026-03-05 | Writing project "Huset" started in class 4C. |
+| 2026-03-05 | Study days confirmed: 17 mars (studiedag), 15 maj (lovdag), 15 juni (fritids stangda). |
+| 2026-03-05 | SSPF digital parent meeting 25 mars 17-19 about youth online safety. |
+| 2026-03-05 | 59 family photos added to slideshow. |
+| 2026-03-05 | Week view expanded to show 2 weeks (current + next). |
+
 *Claude: append new rows to the Log table as facts emerge. Update sections above when stable patterns are confirmed.*

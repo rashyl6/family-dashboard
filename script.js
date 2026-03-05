@@ -113,27 +113,26 @@ function renderNarrative(data) {
   }
 }
 
-/* ─── Section 3 — Week Ahead ────────────────────────────────── */
+/* ─── Section 3 — Week Ahead (2 weeks) ─────────────────────── */
 function renderWeek(data) {
-  const strip = $('week-strip');
-  if (!strip) return;
+  const container = $('week-strip');
+  if (!container) return;
 
-  // Build Mon–Sun of current week
-  const days = [];
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const dow = today.getDay(); // 0=Sun, 1=Mon...6=Sat
+  const dow = today.getDay();
   const daysToMonday = dow === 0 ? -6 : 1 - dow;
   const monday = new Date(today);
   monday.setDate(today.getDate() + daysToMonday);
-  for (let i = 0; i < 7; i++) {
+
+  const week1 = [], week2 = [];
+  for (let i = 0; i < 14; i++) {
     const d = new Date(monday);
     d.setDate(monday.getDate() + i);
     const iso = d.toISOString().split('T')[0];
-    days.push({ iso, d });
+    (i < 7 ? week1 : week2).push({ iso, d });
   }
 
-  // Index events by date
   const eventsByDate = {};
   if (data && data.events) {
     data.events.forEach(ev => {
@@ -142,31 +141,57 @@ function renderWeek(data) {
     });
   }
 
-  strip.innerHTML = '';
-  days.forEach(({ iso, d }) => {
-    const dayEl = document.createElement('div');
-    dayEl.className = 'week-day' + (isToday(iso) ? ' today' : '');
+  function buildDayCell(iso, d) {
+    const el = document.createElement('div');
+    el.className = 'week-day' + (isToday(iso) ? ' today' : '') + (d < today ? ' past' : '');
 
-    const dayName = d.toLocaleDateString('sv-SE', { weekday: 'short' });
-    const dayNum  = d.getDate();
+    const lbl = document.createElement('div');
+    lbl.className = 'week-day-label';
+    lbl.textContent = d.toLocaleDateString('sv-SE', { weekday: 'short' });
+    el.appendChild(lbl);
 
-    let html = `
-      <div class="week-day-label">${dayName}</div>
-      <div class="week-day-date">${dayNum}</div>
-    `;
+    const num = document.createElement('div');
+    num.className = 'week-day-date';
+    num.textContent = d.getDate();
+    el.appendChild(num);
 
     const evs = eventsByDate[iso] || [];
     evs.forEach(ev => {
-      const color = ev.color || '#4A5568';
-      html += `<div class="week-event" style="border-color:${color}">
-        ${ev.time ? `<span class="week-event-time">${ev.time}</span>` : ''}
-        ${ev.title}
-      </div>`;
+      const evEl = document.createElement('div');
+      evEl.className = 'week-event' + (ev.allDay ? ' all-day' : '');
+      evEl.style.borderColor = ev.color || '#4A5568';
+      if (ev.allDay) evEl.style.background = (ev.color || '#4A5568') + '22';
+      if (ev.time) {
+        const timeSpan = document.createElement('span');
+        timeSpan.className = 'week-event-time';
+        timeSpan.textContent = ev.time;
+        evEl.appendChild(timeSpan);
+      }
+      evEl.appendChild(document.createTextNode(ev.title));
+      if (ev.note) evEl.title = ev.note;
+      el.appendChild(evEl);
     });
 
-    dayEl.innerHTML = html;
-    strip.appendChild(dayEl);
-  });
+    return el;
+  }
+
+  function buildWeekSection(days, label) {
+    const section = document.createElement('div');
+    section.className = 'week-section';
+    const heading = document.createElement('div');
+    heading.className = 'week-row-label';
+    heading.textContent = label;
+    section.appendChild(heading);
+    const row = document.createElement('div');
+    row.className = 'week-row';
+    days.forEach(item => row.appendChild(buildDayCell(item.iso, item.d)));
+    section.appendChild(row);
+    return section;
+  }
+
+  container.textContent = '';
+  container.appendChild(buildWeekSection(week1, 'Denna vecka'));
+  container.appendChild(buildWeekSection(week2, 'Nästa vecka'));
 }
 
 /* ─── Section 4 — Kids' Corner ──────────────────────────────── */
