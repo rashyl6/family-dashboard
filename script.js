@@ -129,7 +129,7 @@ function renderWeek(data) {
   for (let i = 0; i < 14; i++) {
     const d = new Date(monday);
     d.setDate(monday.getDate() + i);
-    const iso = d.toISOString().split('T')[0];
+    const iso = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     (i < 7 ? week1 : week2).push({ iso, d });
   }
 
@@ -567,16 +567,43 @@ async function renderWeather() {
     const icon = WSYMB[sym] || '🌡️';
     todayEl.innerHTML = `<span class="weather-icon">${icon}</span><span class="weather-temp">${Math.round(t)}°C</span><span class="weather-wind">${Math.round(ws)} m/s</span>`;
 
-    // 5-day forecast (skip today)
-    const forecastDates = dates.filter(d => d !== todayKey).slice(0, 5);
-    forecastEl.innerHTML = forecastDates.map(dateKey => {
-      const { entry } = byDate[dateKey];
+    // Build forecast for rest of current week + next week (match calendar)
+    const now = new Date();
+    now.setHours(0,0,0,0);
+    const wdow = now.getDay();
+    const wMon = new Date(now);
+    wMon.setDate(now.getDate() - (wdow === 0 ? 6 : wdow - 1));
+    const forecastDays = [];
+    for (let i = 0; i < 14; i++) {
+      const fd = new Date(wMon);
+      fd.setDate(wMon.getDate() + i);
+      if (fd <= now) continue; // skip past days and today
+      const fKey = fd.toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+      if (byDate[fKey]) forecastDays.push({ fd, fKey });
+    }
+    forecastEl.textContent = '';
+    forecastDays.slice(0, 6).forEach(function(item) {
+      const entry = byDate[item.fKey].entry;
       const ft = getParam(entry.parameters, 't');
       const fsym = getParam(entry.parameters, 'Wsymb2');
       const ficon = WSYMB[fsym] || '🌡️';
-      const dayName = new Date(dateKey + 'T12:00:00').toLocaleDateString('sv-SE', { weekday: 'short' });
-      return `<div class="forecast-day"><div class="forecast-name">${dayName}</div><div class="forecast-icon">${ficon}</div><div class="forecast-temp">${Math.round(ft)}°</div></div>`;
-    }).join('');
+      const dayName = item.fd.toLocaleDateString('sv-SE', { weekday: 'short' });
+      const div = document.createElement('div');
+      div.className = 'forecast-day';
+      const nameEl = document.createElement('div');
+      nameEl.className = 'forecast-name';
+      nameEl.textContent = dayName;
+      const iconEl = document.createElement('div');
+      iconEl.className = 'forecast-icon';
+      iconEl.textContent = ficon;
+      const tempEl = document.createElement('div');
+      tempEl.className = 'forecast-temp';
+      tempEl.textContent = Math.round(ft) + '°';
+      div.appendChild(nameEl);
+      div.appendChild(iconEl);
+      div.appendChild(tempEl);
+      forecastEl.appendChild(div);
+    });
   } catch(e) {
     todayEl.textContent = 'Kunde inte ladda väder.';
   }
