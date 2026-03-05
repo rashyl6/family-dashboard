@@ -567,43 +567,76 @@ async function renderWeather() {
     const icon = WSYMB[sym] || '🌡️';
     todayEl.innerHTML = `<span class="weather-icon">${icon}</span><span class="weather-temp">${Math.round(t)}°C</span><span class="weather-wind">${Math.round(ws)} m/s</span>`;
 
-    // Build forecast for rest of current week + next week (match calendar)
+    // Build forecast matching the calendar's 2-week layout
     const now = new Date();
     now.setHours(0,0,0,0);
     const wdow = now.getDay();
     const wMon = new Date(now);
     wMon.setDate(now.getDate() - (wdow === 0 ? 6 : wdow - 1));
-    const forecastDays = [];
+
+    function localKey(d) {
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    // Build both weeks (Mon-Sun each), same as calendar
+    const week1days = [], week2days = [];
     for (let i = 0; i < 14; i++) {
       const fd = new Date(wMon);
       fd.setDate(wMon.getDate() + i);
-      if (fd <= now) continue; // skip past days and today
-      const fKey = fd.toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
-      if (byDate[fKey]) forecastDays.push({ fd, fKey });
+      (i < 7 ? week1days : week2days).push(fd);
     }
+
+    function buildForecastRow(days, label) {
+      const section = document.createElement('div');
+      section.className = 'forecast-section';
+      const heading = document.createElement('div');
+      heading.className = 'forecast-section-label';
+      heading.textContent = label;
+      section.appendChild(heading);
+      const row = document.createElement('div');
+      row.className = 'forecast-row';
+      days.forEach(function(fd) {
+        const fKey = fd.toLocaleDateString('sv-SE', { timeZone: 'Europe/Stockholm' });
+        const isNow = fd.getTime() === now.getTime();
+        const isPast = fd < now;
+        const div = document.createElement('div');
+        div.className = 'forecast-day' + (isNow ? ' today' : '') + (isPast ? ' past' : '');
+        const nameEl = document.createElement('div');
+        nameEl.className = 'forecast-name';
+        nameEl.textContent = fd.toLocaleDateString('sv-SE', { weekday: 'short' });
+        div.appendChild(nameEl);
+        if (byDate[fKey] && !isPast) {
+          const entry = byDate[fKey].entry;
+          const ft = getParam(entry.parameters, 't');
+          const fsym = getParam(entry.parameters, 'Wsymb2');
+          const iconEl = document.createElement('div');
+          iconEl.className = 'forecast-icon';
+          iconEl.textContent = WSYMB[fsym] || '—';
+          div.appendChild(iconEl);
+          const tempEl = document.createElement('div');
+          tempEl.className = 'forecast-temp';
+          tempEl.textContent = Math.round(ft) + '°';
+          div.appendChild(tempEl);
+        } else if (isPast) {
+          const dash = document.createElement('div');
+          dash.className = 'forecast-icon';
+          dash.textContent = '—';
+          div.appendChild(dash);
+        } else {
+          const dash = document.createElement('div');
+          dash.className = 'forecast-icon';
+          dash.textContent = '—';
+          div.appendChild(dash);
+        }
+        row.appendChild(div);
+      });
+      section.appendChild(row);
+      return section;
+    }
+
     forecastEl.textContent = '';
-    forecastDays.slice(0, 6).forEach(function(item) {
-      const entry = byDate[item.fKey].entry;
-      const ft = getParam(entry.parameters, 't');
-      const fsym = getParam(entry.parameters, 'Wsymb2');
-      const ficon = WSYMB[fsym] || '🌡️';
-      const dayName = item.fd.toLocaleDateString('sv-SE', { weekday: 'short' });
-      const div = document.createElement('div');
-      div.className = 'forecast-day';
-      const nameEl = document.createElement('div');
-      nameEl.className = 'forecast-name';
-      nameEl.textContent = dayName;
-      const iconEl = document.createElement('div');
-      iconEl.className = 'forecast-icon';
-      iconEl.textContent = ficon;
-      const tempEl = document.createElement('div');
-      tempEl.className = 'forecast-temp';
-      tempEl.textContent = Math.round(ft) + '°';
-      div.appendChild(nameEl);
-      div.appendChild(iconEl);
-      div.appendChild(tempEl);
-      forecastEl.appendChild(div);
-    });
+    forecastEl.appendChild(buildForecastRow(week1days, 'Denna vecka'));
+    forecastEl.appendChild(buildForecastRow(week2days, 'Nästa vecka'));
   } catch(e) {
     todayEl.textContent = 'Kunde inte ladda väder.';
   }

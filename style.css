@@ -249,9 +249,34 @@ body {
 
 .weather-forecast {
   display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-bottom: 0.25rem;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.forecast-section {}
+
+.forecast-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 0.35rem;
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+}
+
+.forecast-day.past {
+  opacity: 0.35;
+}
+
+.forecast-day.today {
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
 }
 
 .forecast-day {
