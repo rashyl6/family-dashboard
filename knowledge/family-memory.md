@@ -62,6 +62,9 @@
 
 - Home insurance: renewal **September 2026**
 - Compare: Hedvig, Länsförsäkringar
+- **Sophamtning:** Every 2 weeks on Tuesdays (restavfall, matavfall, förpackningar). Starting 2026-03-10.
+- **Address:** Ekåsgatan 27, 215 65 Malmö
+- **Allergies:** Both parents have allergies (pollen relevant)
 
 ---
 
@@ -122,4 +125,9 @@
 | 2026-03-05 | Work calendar integrated — business trips and family-affecting work events show on dashboard. |
 | 2026-03-05 | Narrative style: weekly perspective ("den här veckan") not day-anchored. |
 
+| 2026-03-06 | 7 new features added: namnsdagar, sunrise/sunset, holiday countdown, skolmaten, sophamtning, pollen forecast, PostNord packages. |
+| 2026-03-06 | Sophamtning: every 2 weeks on Tuesdays (restavfall, matavfall, förpackningar), starting 2026-03-10. |
+| 2026-03-06 | School: Kulladalsskolan (no lunch API found — manual weekly JSON update needed). |
+| 2026-03-06 | Pollen card auto-hides in winter, shows when pollenrapporten.se reports active pollen in Skåne. |
+| 2026-03-06 | PostNord tracking: /process-inbox now detects PostNord emails and populates packages.json. |
 *Claude: append new rows to the Log table as facts emerge. Update sections above when stable patterns are confirmed.*
