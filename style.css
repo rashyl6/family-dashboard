@@ -147,6 +147,11 @@ body {
 .card:nth-child(8)  { animation-delay: 0.39s; }
 .card:nth-child(9)  { animation-delay: 0.44s; }
 .card:nth-child(10) { animation-delay: 0.49s; }
+.card:nth-child(11) { animation-delay: 0.54s; }
+.card:nth-child(12) { animation-delay: 0.59s; }
+.card:nth-child(13) { animation-delay: 0.64s; }
+.card:nth-child(14) { animation-delay: 0.69s; }
+.card:nth-child(15) { animation-delay: 0.74s; }
 
 .card-title {
   font-family: var(--font-display);
@@ -869,6 +874,205 @@ body {
 
 .birthday-countdown.soon { color: #C53030; }
 
+
+/* ─── Header: Nameday ──────────────────────────────────── */
+.header-nameday {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ─── Sun Times ────────────────────────────────────────── */
+.sun-times {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sun-times .sun-icon { font-size: 1rem; }
+.sun-times .sun-label { font-weight: 600; color: var(--text-light); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ─── Holiday Countdown ────────────────────────────────── */
+.holiday-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.holiday-item:last-child { border-bottom: none; }
+
+.holiday-icon { font-size: 1.3rem; min-width: 2rem; text-align: center; }
+
+.holiday-body { flex: 1; }
+.holiday-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.holiday-dates { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+.holiday-countdown {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: right;
+  min-width: 5rem;
+  line-height: 1.2;
+}
+
+.holiday-countdown .unit {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  display: block;
+}
+
+.holiday-countdown.active { color: #276749; }
+
+/* ─── School Lunch ─────────────────────────────────────── */
+.lunch-header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+
+.lunch-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.3rem;
+}
+
+.lunch-item.today {
+  background: var(--surface-alt);
+  border: 1px solid var(--accent);
+}
+
+.lunch-item.past { opacity: 0.4; }
+
+.lunch-day {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  min-width: 2.5rem;
+}
+
+.lunch-item.today .lunch-day { color: var(--accent); }
+
+.lunch-meal { font-size: 0.88rem; color: var(--text); }
+
+.lunch-stale {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+/* ─── Waste Collection ─────────────────────────────────── */
+.waste-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.waste-item:last-child { border-bottom: none; }
+
+.waste-icon { font-size: 1.4rem; min-width: 2rem; text-align: center; }
+.waste-body { flex: 1; }
+.waste-type { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.waste-date { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+.waste-countdown {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-align: right;
+  min-width: 5rem;
+}
+
+.waste-countdown.today { color: #C53030; font-size: 0.95rem; }
+.waste-countdown.tomorrow { color: #C05621; }
+
+/* ─── Pollen Forecast ──────────────────────────────────── */
+.pollen-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.pollen-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+}
+
+.pollen-type { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+
+.pollen-level {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.pollen-level.low    { background: #C6F6D5; color: #276749; }
+.pollen-level.medium { background: #FEFCBF; color: #975A16; }
+.pollen-level.high   { background: #FED7D7; color: #C53030; }
+.pollen-level.very-high { background: #C53030; color: #fff; }
+
+@media (prefers-color-scheme: dark) {
+  .pollen-level.low    { background: #1a2e25; color: #68d391; }
+  .pollen-level.medium { background: #2d2a1a; color: #ecc94b; }
+  .pollen-level.high   { background: #40191a; color: #fc8181; }
+  .pollen-level.very-high { background: #9b2c2c; color: #fff; }
+}
+
+/* ─── Packages ─────────────────────────────────────────── */
+.package-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.package-item:last-child { border-bottom: none; }
+
+.package-icon { font-size: 1.3rem; min-width: 2rem; text-align: center; }
+.package-body { flex: 1; }
+.package-desc { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.package-tracking { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+
+.package-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  text-align: right;
+}
+
 /* ─── Footer ────────────────────────────────────────────────── */
 .site-footer {
   text-align: center;
@@ -889,7 +1093,8 @@ body {
   #section-calendar,
   #section-kids,
   #section-saved,
-  #section-slideshow {
+  #section-slideshow,
+  #section-lunch {
     grid-column: 1 / -1;
   }
 

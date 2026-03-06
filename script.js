@@ -680,9 +680,319 @@ function renderBirthdays(data) {
   }).join('');
 }
 
+
+/* --- Feature 1: Namnsdagar --- */
+async function fetchNamnsdag() {
+  var el = $('header-nameday');
+  if (!el) return;
+  try {
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = String(today.getMonth() + 1).padStart(2, '0');
+    var d = String(today.getDate()).padStart(2, '0');
+    var res = await fetch('https://api.dryg.net/dagar/v2.1/' + y + '/' + m + '/' + d);
+    var data = await res.json();
+    var names = data.dagar && data.dagar[0] && data.dagar[0].namnsdag;
+    if (names && names.length > 0 && names[0] !== '') {
+      el.textContent = 'Namnsdag: ' + names.join(', ');
+    }
+  } catch (e) { /* silent */ }
+}
+
+/* --- Feature 2: Sunrise/Sunset --- */
+async function fetchSunTimes() {
+  var el = $('sun-times');
+  if (!el) return;
+  try {
+    var res = await fetch('https://api.sunrise-sunset.org/json?lat=55.605&lng=13.004&formatted=0');
+    var data = await res.json();
+    if (data.status !== 'OK') return;
+    var sunrise = new Date(data.results.sunrise);
+    var sunset = new Date(data.results.sunset);
+    function fmt(d) {
+      return d.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Stockholm' });
+    }
+    // Using textContent for the main text parts
+    var icon = document.createElement('span');
+    icon.className = 'sun-icon';
+    icon.textContent = '\u2600\uFE0F';
+    el.textContent = '';
+    el.appendChild(icon);
+    el.appendChild(document.createTextNode(' Sol: ' + fmt(sunrise) + ' \u2013 ' + fmt(sunset)));
+  } catch (e) { /* silent */ }
+}
+
+/* --- Feature 3: Holiday Countdown --- */
+function renderHolidays(data) {
+  var container = $('holidays-list');
+  if (!container) return;
+  var holidays = data && data.holidays ? data.holidays : [];
+  if (holidays.length === 0) {
+    container.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'no-items';
+    p.textContent = 'Inga helgdagar inlagda.';
+    container.appendChild(p);
+    return;
+  }
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  var icons = {};
+  icons['P\u00e5sklov'] = '\uD83D\uDC23';
+  icons['Sommarlov'] = '\u2600\uFE0F';
+  icons['H\u00f6stlov'] = '\uD83C\uDF42';
+  icons['Jul'] = '\uD83C\uDF84';
+  icons['Sportlov'] = '\u26F7\uFE0F';
+
+  var upcoming = holidays.map(function(h) {
+    var start = parseDate(h.date);
+    var end = h.endDate ? parseDate(h.endDate) : null;
+    var daysToStart = Math.round((start - today) / 86400000);
+    var isActive = end ? (today >= start && today <= end) : (daysToStart === 0);
+    var daysLeft = end ? Math.round((end - today) / 86400000) : 0;
+    return { name: h.name, date: h.date, endDate: h.endDate, daysToStart: daysToStart, isActive: isActive, daysLeft: daysLeft, icon: icons[h.name] || '\uD83C\uDF89' };
+  }).filter(function(h) {
+    return h.isActive || h.daysToStart > 0;
+  }).sort(function(a, b) {
+    return a.daysToStart - b.daysToStart;
+  }).slice(0, 3);
+
+  if (upcoming.length === 0) {
+    container.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'no-items';
+    p.textContent = 'Inga kommande lov.';
+    container.appendChild(p);
+    return;
+  }
+
+  container.textContent = '';
+  upcoming.forEach(function(h) {
+    var item = document.createElement('div');
+    item.className = 'holiday-item';
+
+    var iconEl = document.createElement('div');
+    iconEl.className = 'holiday-icon';
+    iconEl.textContent = h.icon;
+    item.appendChild(iconEl);
+
+    var body = document.createElement('div');
+    body.className = 'holiday-body';
+    var nameEl = document.createElement('div');
+    nameEl.className = 'holiday-name';
+    nameEl.textContent = h.isActive ? h.name + '!' : h.name;
+    body.appendChild(nameEl);
+    var datesEl = document.createElement('div');
+    datesEl.className = 'holiday-dates';
+    datesEl.textContent = formatShortDate(h.date) + (h.endDate ? ' \u2013 ' + formatShortDate(h.endDate) : '');
+    body.appendChild(datesEl);
+    item.appendChild(body);
+
+    var countdown = document.createElement('div');
+    countdown.className = 'holiday-countdown' + (h.isActive ? ' active' : '');
+    countdown.textContent = h.isActive ? h.daysLeft : h.daysToStart;
+    var unit = document.createElement('span');
+    unit.className = 'unit';
+    unit.textContent = h.isActive ? 'dagar kvar' : 'dagar';
+    countdown.appendChild(unit);
+    item.appendChild(countdown);
+
+    container.appendChild(item);
+  });
+}
+
+/* --- Feature 4: School Lunch --- */
+function renderLunch(data) {
+  var container = $('lunch-list');
+  if (!container) return;
+  if (!data || !data.menu || data.menu.length === 0) {
+    container.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'no-items';
+    p.textContent = 'Ingen meny inlagd.';
+    container.appendChild(p);
+    return;
+  }
+  var now = new Date();
+  var d = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+  var dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  var currentWeek = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+
+  if (data.week !== currentWeek || data.year !== now.getFullYear()) {
+    container.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'lunch-stale';
+    p.textContent = 'Menyn ej uppdaterad (vecka ' + data.week + ')';
+    container.appendChild(p);
+    return;
+  }
+  var dayNames = ['S\u00f6ndag', 'M\u00e5ndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'L\u00f6rdag'];
+  var todayName = dayNames[now.getDay()];
+  var dayOrder = ['M\u00e5ndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
+
+  container.textContent = '';
+  var header = document.createElement('div');
+  header.className = 'lunch-header';
+  header.textContent = data.school + ' \u00b7 Vecka ' + data.week;
+  container.appendChild(header);
+
+  data.menu.forEach(function(m) {
+    var isTod = m.day === todayName;
+    var dayIdx = dayOrder.indexOf(m.day);
+    var todayIdx = dayOrder.indexOf(todayName);
+    var isPast = dayIdx >= 0 && todayIdx >= 0 && dayIdx < todayIdx;
+    var item = document.createElement('div');
+    item.className = 'lunch-item' + (isTod ? ' today' : '') + (isPast ? ' past' : '');
+    var dayEl = document.createElement('div');
+    dayEl.className = 'lunch-day';
+    dayEl.textContent = m.day.substring(0, 3);
+    item.appendChild(dayEl);
+    var mealEl = document.createElement('div');
+    mealEl.className = 'lunch-meal';
+    mealEl.textContent = m.meal;
+    item.appendChild(mealEl);
+    container.appendChild(item);
+  });
+}
+
+/* --- Feature 5: Waste Collection --- */
+function renderWaste(data) {
+  var container = $('waste-list');
+  if (!container) return;
+  var schedule = data && data.schedule ? data.schedule : [];
+  if (schedule.length === 0) {
+    container.textContent = '';
+    var p = document.createElement('p');
+    p.className = 'no-items';
+    p.textContent = 'Inget schema inlagt.';
+    container.appendChild(p);
+    return;
+  }
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  container.textContent = '';
+  schedule.forEach(function(s) {
+    var next = parseDate(s.nextDate);
+    var freqDays = 14;
+    if (s.frequency === 'weekly') freqDays = 7;
+    else if (s.frequency === 'every-4-weeks') freqDays = 28;
+    while (next < today) {
+      next = new Date(next.getTime() + freqDays * 86400000);
+    }
+    var diff = Math.round((next - today) / 86400000);
+    var countdownText, cls = '';
+    if (diff === 0) { countdownText = 'IDAG!'; cls = ' today'; }
+    else if (diff === 1) { countdownText = 'Imorgon'; cls = ' tomorrow'; }
+    else { countdownText = 'om ' + diff + ' dagar'; }
+    var dateStr = next.toLocaleDateString('sv-SE', { weekday: 'short', day: 'numeric', month: 'short' });
+
+    var item = document.createElement('div');
+    item.className = 'waste-item';
+    var iconEl = document.createElement('div');
+    iconEl.className = 'waste-icon';
+    iconEl.textContent = s.icon || '\uD83D\uDDD1\uFE0F';
+    item.appendChild(iconEl);
+    var body = document.createElement('div');
+    body.className = 'waste-body';
+    var typeEl = document.createElement('div');
+    typeEl.className = 'waste-type';
+    typeEl.textContent = s.type;
+    body.appendChild(typeEl);
+    var dateEl = document.createElement('div');
+    dateEl.className = 'waste-date';
+    dateEl.textContent = dateStr;
+    body.appendChild(dateEl);
+    item.appendChild(body);
+    var countEl = document.createElement('div');
+    countEl.className = 'waste-countdown' + cls;
+    countEl.textContent = countdownText;
+    item.appendChild(countEl);
+    container.appendChild(item);
+  });
+}
+
+/* --- Feature 6: Pollen Forecast --- */
+async function fetchPollen() {
+  var card = $('section-pollen');
+  var container = $('pollen-list');
+  if (!card || !container) return;
+  try {
+    var res = await fetch('https://api.pollenrapporten.se/v1/forecasts?region=Sk%C3%A5ne');
+    if (!res.ok) return;
+    var data = await res.json();
+    var items = [];
+    if (Array.isArray(data)) {
+      data.forEach(function(f) { if (f.type && f.level > 0) items.push({ type: f.type, level: f.level, label: f.levelDescription || '' }); });
+    } else if (data.forecasts) {
+      data.forecasts.forEach(function(f) { if (f.type && f.level > 0) items.push({ type: f.type, level: f.level, label: f.levelDescription || '' }); });
+    }
+    if (items.length === 0) return;
+    card.style.display = '';
+    function levelClass(l) { if (l <= 2) return 'low'; if (l <= 4) return 'medium'; if (l <= 6) return 'high'; return 'very-high'; }
+
+    container.textContent = '';
+    var grid = document.createElement('div');
+    grid.className = 'pollen-grid';
+    items.forEach(function(i) {
+      var item = document.createElement('div');
+      item.className = 'pollen-item';
+      var typeEl = document.createElement('div');
+      typeEl.className = 'pollen-type';
+      typeEl.textContent = i.type;
+      item.appendChild(typeEl);
+      var levelEl = document.createElement('div');
+      levelEl.className = 'pollen-level ' + levelClass(i.level);
+      levelEl.textContent = i.label;
+      item.appendChild(levelEl);
+      grid.appendChild(item);
+    });
+    container.appendChild(grid);
+  } catch (e) { /* silent */ }
+}
+
+/* --- Feature 7: PostNord Packages --- */
+function renderPackages(data) {
+  var card = $('section-packages');
+  var container = $('packages-list');
+  if (!card || !container) return;
+  var packages = data && data.packages ? data.packages : [];
+  if (packages.length === 0) return;
+  card.style.display = '';
+  container.textContent = '';
+  packages.forEach(function(p) {
+    var item = document.createElement('div');
+    item.className = 'package-item';
+    var iconEl = document.createElement('div');
+    iconEl.className = 'package-icon';
+    iconEl.textContent = '\uD83D\uDCE6';
+    item.appendChild(iconEl);
+    var body = document.createElement('div');
+    body.className = 'package-body';
+    var descEl = document.createElement('div');
+    descEl.className = 'package-desc';
+    descEl.textContent = p.description || p.trackingNumber;
+    body.appendChild(descEl);
+    var trackEl = document.createElement('div');
+    trackEl.className = 'package-tracking';
+    var trackText = p.trackingNumber || '';
+    if (p.estimatedDelivery) trackText += (trackText ? ' \u00b7 ' : '') + 'Ber\u00e4knad: ' + formatShortDate(p.estimatedDelivery);
+    trackEl.textContent = trackText;
+    body.appendChild(trackEl);
+    item.appendChild(body);
+    var statusEl = document.createElement('div');
+    statusEl.className = 'package-status';
+    statusEl.textContent = p.status || 'Ok\u00e4nd';
+    item.appendChild(statusEl);
+    container.appendChild(item);
+  });
+}
+
 /* ─── Main Init ─────────────────────────────────────────────── */
 async function init() {
-  const [config, narrative, calendar, homework, exams, family, admin, routines, saved, birthdays] = await Promise.all([
+  const [config, narrative, calendar, homework, exams, family, admin, routines, saved, birthdays, holidays, lunch, waste, packages] = await Promise.all([
     fetchJSON('data/config.json'),
     fetchJSON('data/narrative.json'),
     fetchJSON('data/calendar.json'),
@@ -693,16 +1003,27 @@ async function init() {
     fetchJSON('data/routines.json'),
     fetchJSON('data/saved.json'),
     fetchJSON('data/birthdays.json'),
+    fetchJSON('data/holidays.json'),
+    fetchJSON('data/lunch.json'),
+    fetchJSON('data/waste.json'),
+    fetchJSON('data/packages.json'),
   ]);
 
   renderHeader(config);
   renderNarrative(narrative);
   renderWeather();
+  fetchSunTimes();
+  fetchNamnsdag();
   renderWeek(calendar);
   renderKids(config, homework, exams);
   renderBirthdays(birthdays);
   renderFamily(family);
   renderAdmin(admin);
+  renderHolidays(holidays);
+  renderLunch(lunch);
+  renderWaste(waste);
+  fetchPollen();
+  renderPackages(packages);
   renderRoutines(routines);
   renderSaved(saved);
   renderSlideshow();
