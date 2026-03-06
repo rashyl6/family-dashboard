@@ -2,10 +2,22 @@
   "address": "Ekåsgatan 27, Malmö",
   "schedule": [
     {
-      "type": "Sopor",
+      "type": "Restavfall",
       "frequency": "every-2-weeks",
       "nextDate": "2026-03-10",
       "icon": "🗑️"
+    },
+    {
+      "type": "Matavfall",
+      "frequency": "every-2-weeks",
+      "nextDate": "2026-03-10",
+      "icon": "🟤"
+    },
+    {
+      "type": "Förpackningar",
+      "frequency": "every-2-weeks",
+      "nextDate": "2026-03-10",
+      "icon": "♻️"
     }
   ]
 }
