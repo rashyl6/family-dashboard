@@ -154,6 +154,17 @@
       "color": "#4A5568",
       "type": "family",
       "note": "SSPF via Teams. ID: 363 216 102 101 93"
+    },
+    {
+      "date": "2026-03-12",
+      "day": "Thursday",
+      "title": "Internetsäkerhet klassbesök 4C",
+      "who": "Klara",
+      "time": "",
+      "color": "#7B5EA7",
+      "type": "kids",
+      "allDay": true,
+      "note": "Maria Wennergren och kurator Erik pratar om nätsäkerhet och grooming"
     }
   ]
 }

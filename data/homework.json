@@ -13,6 +13,20 @@
       "task": "Skrivprojekt: boken Huset (pågående)",
       "due": "2026-04-01",
       "done": false
+    },
+    {
+      "kid": "Ebbe",
+      "subject": "Svenska",
+      "task": "Läsläxa (kapitel 22, till måndag)",
+      "due": "2026-03-09",
+      "done": false
+    },
+    {
+      "kid": "Ebbe",
+      "subject": "Matematik",
+      "task": "Multiplikationstabell 2",
+      "due": "2026-03-09",
+      "done": false
     }
   ]
 }
